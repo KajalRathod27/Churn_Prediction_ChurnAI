@@ -6,5 +6,4 @@ scikit-learn
 xgboost
 lightgbm
 joblib
-tensorflow
 python-multipart
