@@ -1,0 +1,96 @@
+src results : 
+
+(.venv) PS C:\Users\bhara\OneDrive\Desktop\Churn_Prediction\src> python preprocessing.py
+[load]  Loaded from local  →  data/raw/teleco_churn.csv  shape=(7043, 21)
+[fix]   TotalCharges: 11 NaN filled with median
+[enc]   Binary cols encoded: ['gender', 'Partner', 'Dependents', 'PhoneService', 'PaperlessBilling']
+[enc]   One-hot: 20 → 31 columns
+[clean] Final shape: (7043, 31)
+[norm]  Scaled ['tenure', 'MonthlyCharges', 'TotalCharges']  →  scaler saved to models/scaler.pkl
+\n✅  Cleaned data saved  →  data/processed/cleaned_data.csv  shape=(7043, 31)
+(.venv) PS C:\Users\bhara\OneDrive\Desktop\Churn_Prediction\src> python feature_engineering.py
+[load]  Loaded  →  data/processed/cleaned_data.csv  shape=(7043, 31)
+[feat]  31 → 41 columns  (+10 new features)
+ber_risk']
+\n✅  Featured data saved  →  data/processed/featured_data.csv  shape=(7043, 41)
+
+
+(.venv) PS C:\Users\bhara\OneDrive\Desktop\Churn_Prediction\src> python train.py
+[data]  Loaded  →  X=(7043, 40)  churn_rate=26.5%
+[split] Train=(5634, 40)  Test=(1409, 40)
+[smote] Before: {0: np.int64(4139), 1: np.int64(1495)}
+[smote] After : {0: np.int64(4139), 1: np.int64(4139)}
+\n[train] logistic_regression
+  CV AUC: 0.8456 ± 0.0126
+\n=======================================================\n  logistic_regression\n=======================================================
+              precision    recall  f1-score   support
+
+           0       0.87      0.76      0.81      1035
+           1       0.50      0.68      0.58       374
+
+    accuracy                           0.74      1409
+   macro avg       0.69      0.72      0.69      1409
+weighted avg       0.77      0.74      0.75      1409
+
+  ROC-AUC = 0.8158
+[save]  Saved → models\logistic_regression.pkl
+\n[train] random_forest
+  CV AUC: 0.8446 ± 0.0126
+\n=======================================================\n  random_forest\n=======================================================
+              precision    recall  f1-score   support
+
+           0       0.89      0.77      0.82      1035
+           1       0.53      0.73      0.62       374
+
+    accuracy                           0.76      1409
+   macro avg       0.71      0.75      0.72      1409
+weighted avg       0.79      0.76      0.77      1409
+
+  ROC-AUC = 0.8383
+[save]  Saved → models\random_forest.pkl
+\n[train] xgboost
+  CV AUC: 0.8363 ± 0.0105
+\n=======================================================\n  xgboost\n=======================================================
+              precision    recall  f1-score   support
+
+           0       0.87      0.79      0.83      1035
+           1       0.54      0.68      0.60       374
+
+    accuracy                           0.76      1409
+   macro avg       0.71      0.73      0.71      1409
+
+  ROC-AUC = 0.8249
+[save]  Saved → models\xgboost.pkl
+\n📊 FINAL COMPARISON
+                     Accuracy  Precision  Recall  F1 Score  ROC-AUC
+logistic_regression    0.7367     0.5029  0.6845    0.5798   0.8158
+random_forest          0.7580     0.5322  0.7299    0.6156   0.8383
+xgboost                0.7601     0.5381  0.6791    0.6005   0.8249
+\n🏆 Best: random_forest  ROC-AUC=0.8383
+[chart] Saved → reports\model_comparison_bar.png
+\n✅ Training complete!
+(.venv) PS C:\Users\bhara\OneDrive\Desktop\Churn_Prediction\src> python evaluate.py
+✅ Saved → reports\roc_curves.png
+✅ Saved → reports\precision_recall_curves.png
+✅ Saved → reports\confusion_matrix.png
+\nThreshold Analysis:
+ Threshold  Precision  Recall  F1 Score
+      0.10     0.3865  0.9332    0.5466
+      0.15     0.4144  0.8930    0.5661
+      0.20     0.4376  0.8717    0.5827
+      0.25     0.4640  0.8449    0.5991
+      0.30     0.4790  0.8235    0.6057
+      0.35     0.5017  0.7995    0.6165
+      0.40     0.5117  0.7594    0.6114
+      0.45     0.5237  0.7086    0.6023
+      0.50     0.5381  0.6791    0.6005
+      0.55     0.5612  0.6497    0.6022
+      0.60     0.5870  0.6043    0.5955
+      0.65     0.6224  0.5508    0.5844
+      0.70     0.6364  0.4679    0.5393
+      0.75     0.6638  0.4118    0.5083
+      0.80     0.7086  0.3316    0.4517
+      0.85     0.7333  0.2353    0.3563
+      0.90     0.7714  0.1444    0.2432
+✅ Saved → reports\threshold_analysis.png
+\n✅ Full evaluation complete. Plots saved to reports/

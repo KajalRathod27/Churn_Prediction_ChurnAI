@@ -1,0 +1,41 @@
+Feature,Mean_SHAP
+contract_risk,0.7074983
+InternetService_Fiber optic,0.6733327
+PaymentMethod_Electronic check,0.5689495
+tenure,0.48274744
+MonthlyCharges,0.38617688
+MultipleLines_Yes,0.37978765
+StreamingTV_Yes,0.35110277
+StreamingMovies_Yes,0.34863183
+PaymentMethod_Credit card (automatic),0.20678413
+Dependents,0.20127596
+PaymentMethod_Mailed check,0.1907189
+TotalCharges,0.18431625
+Contract_One year,0.18206286
+avg_monthly_revenue,0.15806584
+revenue_per_tenure,0.15803726
+OnlineBackup_Yes,0.15253565
+DeviceProtection_Yes,0.15168364
+charges_x_tenure,0.12445705
+gender,0.12155607
+fiber_risk,0.108905554
+Partner,0.08373419
+Contract_Two year,0.065847315
+PaperlessBilling,0.04779884
+OnlineSecurity_Yes,0.043348543
+high_value,0.042660724
+SeniorCitizen,0.03770948
+TechSupport_Yes,0.034073364
+InternetService_No,0.019353082
+PhoneService,0.018220905
+MultipleLines_No phone service,0.004916018
+OnlineBackup_No internet service,0.0035302017
+OnlineSecurity_No internet service,0.0031971058
+total_services,0.0009599774
+StreamingTV_No internet service,0.0
+DeviceProtection_No internet service,0.0
+TechSupport_No internet service,0.0
+StreamingMovies_No internet service,0.0
+tenure_group_MedRisk_13_24m,0.0
+tenure_group_LowRisk_25_48m,0.0
+tenure_group_VeryLow_49m_plus,0.0
